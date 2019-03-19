@@ -1,0 +1,18 @@
+#!/bin/bash
+for filepath in ~/Fiisoft/alpha-team-standup/standup/*.md; do
+	filename=$(basename $filepath)
+    yyyy=${filename:0:4}
+    mm=${filename:4:2}
+    dd=${filename:6:2}
+    user=${filename:9}
+    echo $user
+    new_filename=$yyyy-$mm-$dd-$yyyy$mm$dd-$user
+    new_filepath=~/Fiisoft/my-alpha/_posts/$new_filename
+    cp $filepath $new_filepath
+    header="---\n"
+    header+='layout:\tpost\n'
+    header+="date:\t$yyyy-$mm-$dd\n"
+    header+="categories:\tstandup\n"
+    header+="---\n"
+    printf "%b" $header | cat - $new_filepath > temp && mv temp $new_filepath
+done
