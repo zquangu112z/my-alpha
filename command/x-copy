@@ -5,8 +5,14 @@ for filepath in ~/Fiisoft/alpha-team-standup/standup/*.md; do
     mm=${filename:4:2}
     dd=${filename:6:2}
     user=${filename:9}
-    echo $user
-    new_filename=$yyyy-$mm-$dd-$yyyy$mm$dd-$user
+    # echo $user
+    new_filename=$yyyy-$mm-$dd-$user
+    todate=$(date +%Y%m%d)
+    if [ $todate -eq $yyyy$mm$dd ];
+    then
+        new_filename=$yyyy-$mm-$dd-[NEW]----$user
+    fi
+    
     new_filepath=~/Fiisoft/my-alpha/_posts/$new_filename
     cp $filepath $new_filepath
     header="---\n"
